@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulačka známek</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .card {
+            background-color: #2a2a2a;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 450px;
+            width: 100%;
+        }
+        h1 { font-size: 1.8rem; margin: 0 0 10px 0; color: #ffffff; text-align: center; }
+        .subtitle { font-size: 0.95rem; color: #b0b0b0; margin: 0 0 25px 0; text-align: center; }
+        .input-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        input { flex: 1; padding: 12px; background-color: #333333; border: 1px solid #444; border-radius: 10px; color: #fff; font-size: 1rem; }
+        input:focus { outline: none; border-color: #3498db; }
+        button { background-color: #3498db; color: white; border: none; padding: 12px 20px; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        button:hover { background-color: #2980b9; }
+        .grades-list { list-style: none; padding: 0; margin: 20px 0; max-height: 150px; overflow-y: auto; }
+        .grades-list li { background-color: #333; padding: 8px 12px; margin-bottom: 8px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .grades-list button.delete-btn { background: none; color: #e74c3c; padding: 0; font-size: 1rem; cursor: pointer; }
+        .result-box { background-color: #333333; padding: 15px; border-radius: 12px; text-align: center; margin-top: 20px; }
+        .result-box h2 { margin: 0; font-size: 1.4rem; color: #2ecc71; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #b0b0b0; text-decoration: none; font-size: 0.9rem; }
+        .back-link:hover { color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Kalkulačka známek</h1>
+        <p class="subtitle">Zadej známku a její váhu</p>
+        <div class="input-group">
+            <input type="number" id="gradeInput" placeholder="Známka (1-5)" min="1" max="5">
+            <input type="number" id="weightInput" placeholder="Váha (např. 10)" min="1">
+            <button onclick="addGrade()">Přidat</button>
+        </div>
+        <ul class="grades-list" id="gradesList"></ul>
+        <div class="result-box">
+            <p style="margin: 0 0 5px 0; font-size: 0.9rem; color: #b0b0b0;">Vážený průměr:</p>
+            <h2 id="averageResult">0.00</h2>
+        </div>
+        <a href="../" class="back-link"><i class="fas fa-arrow-left"></i> Zpět na hlavní stránku</a>
+    </div>
+
+    <script>
+        let grades = [];
+        function addGrade() {
+            const gradeVal = parseFloat(document.getElementById('gradeInput').value);
+            const weightVal = parseFloat(document.getElementById('weightInput').value);
+            if (isNaN(gradeVal) || gradeVal < 1 || gradeVal > 5) { alert("Zadej platnou známku od 1 do 5."); return; }
+            if (isNaN(weightVal) || weightVal <= 0) { alert("Zadej platnou váhu."); return; }
+            grades.push({ grade: gradeVal, weight: weightVal });
+            document.getElementById('gradeInput').value = '';
+            document.getElementById('weightInput').value = '';
+            document.getElementById('gradeInput').focus();
+            updateUI();
+        }
+        function deleteGrade(index) { grades.splice(index, 1); updateUI(); }
+        function updateUI() {
+            const listEl = document.getElementById('gradesList');
+            listEl.innerHTML = '';
+            if (grades.length === 0) { listEl.innerHTML = '<li style="justify-content: center; color: #777;">Zatím žádné známky</li>'; document.getElementById('averageResult').innerText = '0.00'; return; }
+            let sumWeightedGrades = 0, sumWeights = 0;
+            grades.forEach((item, index) => {
+                sumWeightedGrades += item.grade * item.weight;
+                sumWeights += item.weight;
+                const li = document.createElement('li');
+                li.innerHTML = `<span>Známka: <strong>${item.grade}</strong> (váha ${item.weight})</span><button class="delete-btn" onclick="deleteGrade(${index})"><i class="fas fa-trash"></i></button>`;
+                listEl.appendChild(li);
+            });
+            document.getElementById('averageResult').innerText = (sumWeightedGrades / sumWeights).toFixed(2);
+        }
+        updateUI();
+    </script>
+</body>
+</html>

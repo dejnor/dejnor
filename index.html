@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ondřej Krejčí - Osobní web</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .card {
+            background-color: #2a2a2a;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+        .profile-pic-container {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 25px auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .profile-pic-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        h1 {
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+        }
+        .subtitle {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin: 0 0 30px 0;
+            line-height: 1.5;
+        }
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: #333333;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+        .btn-instagram:hover { background-color: #c13584; }
+        .btn-facebook:hover { background-color: #1877f2; }
+        .btn-email:hover { background-color: #ea4335; }
+        .btn-github:hover { background-color: #333333; border: 1px solid #fff; }
+        .btn-grades { background-color: #2980b9; margin-top: 10px; }
+        .btn-grades:hover { background-color: #3498db; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="profile-pic-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Ondřej Krejčí">
+        </div>
+        <h1>Ondřej Krejčí</h1>
+        <p class="subtitle">Vítejte na mém osobním webu.</p>
+
+        <div class="links-container">
+            <a href="ZDE_VLOZ_ODKAZ_NA_INSTAGRAM" class="btn btn-instagram" target="_blank">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+            <a href="ZDE_VLOZ_ODKAZ_NA_FACEBOOK" class="btn btn-facebook" target="_blank">
+                <i class="fab fa-facebook"></i> Facebook
+            </a>
+            <a href="mailto:ZDE_VLOZ_EMAIL" class="btn btn-email">
+                <i class="fas fa-envelope"></i> E-mail
+            </a>
+            <a href="https://github.com/dejnork" class="btn btn-github" target="_blank">
+                <i class="fab fa-github"></i> GitHub
+            </a>
+            <!-- Odkaz na kalkulačku známek -->
+            <a href="znamky/" class="btn btn-grades">
+                <i class="fas fa-calculator"></i> Kalkulačka známek
+            </a>
+        </div>
+    </div>
+</body>
+</html>
